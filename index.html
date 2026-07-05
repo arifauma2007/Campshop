@@ -1085,7 +1085,7 @@
                         <a href="https://www.instagram.com/ar1f_50" target="_blank" class="social-icon text-white-50">
                             <i class="bi bi-instagram"></i>
                         </a>
-                        <a href="https://line.me/ti/p/~YOUR_LINE_ID" target="_blank" class="social-icon text-white-50">
+                        <a href="https://line.me/ti/p/~1940201239191" target="_blank" class="social-icon text-white-50">
                             <i class="bi bi-line"></i>
                         </a>
                         <a href="https://www.tiktok.com/@haiper.11" target="_blank" class="social-icon text-white-50">
@@ -1156,6 +1156,29 @@
 
         function quickAdd(itemName) {
             pushToCart(itemName);
+            
+            // ค้นหาหมวดหมู่หลัก (Category) จากชื่อสินค้าที่กดเพิ่ม
+            let foundCategory = "";
+            for (const cat in subCategories) {
+                if (subCategories[cat].includes(itemName)) {
+                    foundCategory = cat;
+                    break;
+                }
+            }
+            
+            // ถ้าเจอหมวดหมู่ ให้สั่งอัปเดตตัวเลือกในฟอร์มทันที เพื่อให้แสดงผลเหมือน รูปที่ 2
+            if (foundCategory) {
+                const mainSelect = document.getElementById('mainCategory');
+                mainSelect.value = foundCategory;
+                
+                // สั่งให้โหลดรายการสินค้าประเภทเฉพาะขึ้นมาแสดงผล
+                updateSubCategory();
+                
+                // เลือกชื่อสินค้าชิ้นนั้นในช่อง Dropdown ย่อยทันที
+                const subSelect = document.getElementById('subCategory');
+                subSelect.value = itemName;
+            }
+
             document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
         }
 
